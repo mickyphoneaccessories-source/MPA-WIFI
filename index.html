@@ -6,9 +6,15 @@
   <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header><div class="brand"><div class="mark">M-P-A</div><div><h1>M-P-A Wi-Fi</h1><small>HOTSPOT MANAGEMENT</small></div></div><span class="pill">Starter • Demo</span></header>
+<header>
+  <div class="brand">
+    <div class="logo-mark" aria-label="M-P-A logo"><span class="headphones">♫</span><strong>MPA</strong></div>
+    <div><h1>M-P-A Wi-Fi</h1><small>HOTSPOT MANAGEMENT</small></div>
+  </div>
+  <span class="pill">Starter • Demo</span>
+</header>
 <main>
-  <section class="notice"><b>Maandalizi ya mfumo</b><p>Muonekano na kanuni za biashara zimeandaliwa. Malipo halisi na kuwasha/kuzima internet vitahitaji Supabase, Payment Gateway na Hotspot Controller (mf. MikroTik au kifaa chenye Hotspot API).</p></section>
+  <section class="notice"><b>Karibu MPA-WIFI</b><p>Chagua kifurushi, kisha chagua njia ya malipo. Malipo halisi na kuwasha intaneti moja kwa moja vitawezeshwa baada ya kuunganisha Payment Gateway, Supabase na Hotspot Controller.</p></section>
   <nav id="nav">
     <button class="active" data-tab="dashboard">Dashboard</button><button data-tab="packages">Vifurushi</button><button data-tab="free">FREE ACCESS</button><button data-tab="payments">Malipo</button><button data-tab="staff">Wafanyakazi</button>
   </nav>
@@ -19,7 +25,7 @@
     </div><h3>Muhtasari</h3><p class="muted">Takwimu zitaonekana baada ya kuunganisha database na hotspot.</p>
   </section>
   <section id="packages" class="tab">
-    <h2>Vifurushi vya wateja</h2><p class="muted">Bei ulizochagua. Muda mpya huongezwa baada ya muda wa zamani kuisha.</p>
+    <h2>Vifurushi vya Wi-Fi</h2><p class="muted">Vifurushi na bei zote zinaonekana pamoja. Gusa kifurushi unachotaka.</p>
     <div id="packageList" class="package-list"></div>
   </section>
   <section id="free" class="tab">
@@ -34,14 +40,32 @@
     <div id="freeList" class="list"></div>
   </section>
   <section id="payments" class="tab">
-    <h2>Malipo ya wateja</h2><div class="panel">
-      <label>Kifurushi<select id="payPackage"></select></label>
-      <label>Namba ya simu<input placeholder="07XXXXXXXX" inputmode="tel"></label>
-      <label>Mtandao wa malipo<select><option>M-Pesa</option><option>Airtel Money</option><option>Mixx by Yas</option><option>HaloPesa</option></select></label>
-      <button class="primary" id="paymentDemo">Onyesha hatua za malipo</button>
-      <p id="paymentInfo" class="muted">Huu ni mfano wa ukurasa. Hakuna fedha itakayokatwa katika demo hii.</p>
+    <h2>Lipia Wi-Fi</h2>
+    <div class="panel">
+      <h3>1. Chagua kifurushi</h3>
+      <div id="paymentPackages" class="package-list compact"></div>
+      <div class="selected-summary" id="selectedSummary">Chagua kifurushi ili kuona bei.</div>
+      <h3>2. Chagua njia ya malipo</h3>
+      <div class="payment-methods">
+        <button class="method selected" data-method="mpesa"><span class="network-logo mpesa">M</span><b>M-Pesa</b></button>
+        <button class="method" data-method="mixx_by_yas"><span class="network-logo mixx">Y</span><b>Mixx by Yas</b></button>
+        <button class="method" data-method="airtel_money"><span class="network-logo airtel">A</span><b>Airtel Money</b></button>
+        <button class="method" data-method="halopesa"><span class="network-logo halo">H</span><b>HaloPesa</b></button>
+      </div>
+      <div class="lipa-box">
+        <span class="eyebrow">LIPA NAMBA YA BIASHARA • VODACOM M-PESA</span>
+        <strong class="lipa-number">52130100</strong>
+        <b>MICKY PHONE ACCESSORIES</b>
+        <button type="button" class="copy-button" id="copyLipa">Nakili Lipa Namba</button>
+      </div>
+      <h3>3. Taarifa za malipo</h3>
+      <label>Namba ya simu unayotumia kulipa<input id="payerPhone" type="tel" inputmode="tel" placeholder="07XXXXXXXX au 06XXXXXXXX"></label>
+      <label>Kiasi unacholipa (TSh)<input id="payAmount" type="number" min="1" inputmode="numeric" placeholder="Chagua kifurushi kwanza"></label>
+      <p class="muted small">Kwa Lipa Namba, fungua menyu ya M-Pesa kwenye simu yako, lipa kwa namba 52130100, kisha weka kiasi kinachoonyeshwa. Kwa malipo ya moja kwa moja ya mitandao mingine, mteja atathibitisha kwenye simu yake baada ya Payment Gateway kuunganishwa.</p>
+      <button class="primary" id="paymentDemo">Endelea na malipo</button>
+      <p id="paymentInfo" class="muted" role="status">Huu ni ukurasa wa maandalizi. Hakuna ombi la malipo linalotumwa bado.</p>
     </div>
-    <h3>Kanuni za miamala</h3><ul><li>Internet ifunguke baada ya uthibitisho rasmi wa malipo (webhook).</li><li>Transaction ID moja isitumike kuongeza muda mara mbili.</li><li>Kifurushi kipya kiongezwe mwisho wa muda uliopo.</li></ul>
+    <h3>Usalama wa miamala</h3><ul><li>Intaneti ifunguke baada ya uthibitisho rasmi wa malipo.</li><li>Transaction ID moja isitumike kuongeza muda mara mbili.</li><li>Usiweke PIN au OTP ya simu kwenye ukurasa huu.</li></ul>
   </section>
   <section id="staff" class="tab">
     <h2>Wafanyakazi na ruhusa</h2><div class="panel"><p><b>Admin:</b> FREE bila kikomo na ana mamlaka yote.</p><p><b>Wafanyakazi:</b> FREE kulingana na ruhusa ya Admin; kila mmoja awe na akaunti yake.</p><p><b>Wateja:</b> hulipia vifurushi au hupewa FREE kwa muda uliowekwa na Admin.</p><p class="muted">Uundaji wa akaunti, nenosiri na ruhusa salama utawezeshwa baada ya kuweka Supabase Auth na RLS.</p></div>
